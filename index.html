@@ -14,6 +14,16 @@
     <title>Hello, world!</title>
   </head>
   <body>
+    <div class="black-bg">
+        <div class="white-bg">
+          <h4>로그인하세요</h4>
+          <button class="btn btn-danger" id="close">닫기</button>
+        </div>
+    </div> 
+    <!-- one-way UI 애니메이션 만드는 법 -->
+    <!-- A상태 -> B상태 -->
+    <!-- 1.시작스타일 2. 최종스타일 3.최종스타일로 변하라고 코드 짬 4.transition 추가 -->
+
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
           <span class="navbar-brand">Navbar</span>
@@ -22,8 +32,6 @@
           </button>
         </div>
     </nav> 
-    
-
 
     <ul class="list-group">
         <li class="list-group-item">An item</li>
@@ -32,13 +40,26 @@
         <li class="list-group-item">A fourth item</li>
         <li class="list-group-item">And a fifth one</li>
     </ul> 
+
+    <button id="login">로그인</button>
+
+    <script>
+        $('#login').on('click', () => {
+            // UI에 애니메이션 추가하려면 가능하면 CSS만으로 처리하는게 좋다
+            // $('.black-bg').fadeIn();
+            $('.black-bg').addClass('show-modal');
+        });
+        $('#close').on('click', () => {
+            $('.black-bg').removeClass('show-modal');
+        });
+    </script>
     
 
     <script>
         // getElement 대신 querySelectorAll을 사용해도 된다
         // querySelector는 CSS를 그대로 사용
         document.querySelector('.navbar-toggler').addEventListener('click', () => {
-            document.querySelectorAll('.list-group')[0].classList.toggle('show');
+            document.querySelectorAll('.list-group')[0].classList.toggle('show-list');
         });
 
     </script>
