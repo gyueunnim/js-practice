@@ -36,7 +36,8 @@
 
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
-          <span class="navbar-brand">Navbar</span>
+          <span class="navbar-brand">JSShop</span>
+          <span class="badge bg-dark">Dark 🔄</span>
           <button class="navbar-toggler" type="button">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -70,13 +71,38 @@
         // form 태그에서 submit 이벤트도 발생
         $('form').on('submit', (e) => {
             if(document.getElementById('email').value == '') {
-                alert('아이디를 입력하세요')
+                alert('아이디를 입력하세요');
                 e.preventDefault(); // 폼 전송을 막아줌
             } else if(document.getElementById('pw').value == '' || document.getElementById('pw').value.length < 6) {
-                alert('비밀번호를 6자 이상입력하세요')
+                alert('비밀번호를 6자 이상입력하세요');
                 e.preventDefault();
             } 
-        })
+        });
+
+        let count = 0;
+        $('.badge').on('click', () => {
+            count += 1;
+            if(count % 2 == 1) {
+                document.getElementsByClassName('badge')[0].innerHTML = 'Light 🔄';
+                $('.navbar').removeClass('navbar-light')
+                $('.navbar').removeClass('bg-light')
+                $('.badge').removeClass('bg-dark')
+                $('.navbar').addClass('navbar-dark')
+                $('.navbar').addClass('bg-dark')
+                $('.badge').addClass('bg-light')
+                $('.badge').css('color', 'black')
+                
+            } else {
+                $('.badge').html('Dark 🔄');
+                $('.navbar').removeClass('navbar-dark')
+                $('.navbar').removeClass('bg-dark')
+                $('.badge').removeClass('bg-light')
+                $('.navbar').addClass('navbar-light')
+                $('.navbar').addClass('bg-light')
+                $('.badge').addClass('bg-dark')
+                $('.badge').css('color', 'white')
+            }
+        });
 
     </script>
     
@@ -87,6 +113,14 @@
         document.querySelector('.navbar-toggler').addEventListener('click', () => {
             document.querySelectorAll('.list-group')[0].classList.toggle('show-list');
         });
+
+        // input에서 값 변화에 따른 이벤트
+        document.getElementById('email').addEventListener('input', function() {
+            // input, change 모두 가능
+        })
+
+        // 느슨한 비교 == 엄격한 비교 ===
+        // 1 == '1' (true), 1 === '1' (false)
 
     </script>
 
