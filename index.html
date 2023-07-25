@@ -61,14 +61,70 @@
         <span id="num">5</span>초 이내 구매시 사은품 증정!
     </div>
 
+    <div style="overflow: hidden;">
+        <div class="slide-container">
+            <div class="slide-box">
+                <img src="./car1.png" alt="">
+            </div>
+            <div class="slide-box">
+                <img src="./car2.png" alt="">
+            </div>
+            <div class="slide-box">
+                <img src="./car3.png" alt="">
+            </div>
+        </div>
+    </div>
+
+    <button class="slide-1">1</button>
+    <button class="slide-2">2</button>
+    <button class="slide-3">3</button>
+    <button class="next">다음</button>
+    <button class="before">이전</button>
+
+    <script>
+        let currentPhoto = 1;
+        $('.slide-1').on('click', () => {
+            currentPhoto = 1;
+            $('.slide-container').css('transform', 'translateX(0vw)');
+        });
+        $('.slide-2').on('click', () => {
+            currentPhoto = 2;
+            $('.slide-container').css('transform', 'translateX(-100vw)');
+        });
+        $('.slide-3').on('click', () => {
+            currentPhoto = 3;
+            $('.slide-container').css('transform', 'translateX(-200vw)');
+        });
+
+        $('.next').on('click', () => {
+            if(currentPhoto == 0) {
+                currentPhoto += 1;
+            }
+            if(currentPhoto < document.getElementsByClassName('slide-box').length) {
+                $('.slide-container').css('transform', 'translateX(-'+currentPhoto+'00vw)');
+                currentPhoto += 1;
+            }
+        })
+
+        $('.before').on('click', () => {
+            if(currentPhoto == 3) {
+                currentPhoto -= 1;
+            } 
+            if(currentPhoto > 0) {
+                currentPhoto -= 1;
+                $('.slide-container').css('transform', 'translateX(-'+currentPhoto+'00vw)');
+            }
+        })
+    </script>
+
+
+
+
+
     <script>
         // 정규식(regex test)을 사용하는 이유
         // 정규식으로 문자 범위 지정 가능
-        // /[a-zA-Z]/.test('abcde')
-        // /\S/.test()
-        // /^a/.test()
-        // /a$/.test()
-        // /(a|b)/.test()
+        // /[a-zA-Z]/.test('abcde'), /\S/.test(), /^a/.test(), /a$/.test(), /(a|b)/.test()
 
         // 정규식으로 이메일형식 검사
         // /\S+@\S+\.\S+/.test(~)
