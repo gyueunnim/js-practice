@@ -57,6 +57,31 @@
         <button id="login" class="btn btn-danger">로그인</button>    
     </div>
 
+    <div class="alert alert-danger">
+        <span id="num">5</span>초 이내 구매시 사은품 증정!
+    </div>
+
+    <script>
+        let second = 5
+        // m초 후 콜백함수 실행
+        setTimeout(function() {
+            
+        }, 1000)
+
+        // m초 마다 실행
+        setInterval(function() {
+            second -= 1;
+            if(second == 0) {
+                $('.alert').hide();
+            } else {
+                document.querySelector('#num').innerHTML = second;
+            }
+        }, 1000);
+        
+        // 자바스크립트 문법만 배우면 할 수 있는게 많이 업승ㅁ
+        // 브라우저 문법도 많이 알아두기(Web Browser API)
+    </script>
+
     <script>
 
         $('#login').on('click', () => {
