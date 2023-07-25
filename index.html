@@ -37,12 +37,39 @@
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
           <span class="navbar-brand">JSShop</span>
-          <span class="badge bg-dark">Dark 🔄</span>
+          <span class="ms-auto mx-3 badge bg-dark">Dark 🔄</span>
           <button class="navbar-toggler" type="button">
             <span class="navbar-toggler-icon"></span>
           </button>
         </div>
+        <div class="line"></div>
     </nav> 
+
+
+    
+
+    <script>
+        let lineNum = 1;
+        window.addEventListener('scroll', function() {
+            // window.scrollY와 window.pageYOffset은 같다
+            // window.scrollTo(0,100) 강제로 스크롤하기
+            // window.scrollBy() 현재 위치부터
+            // 부트스트랩쓰면 스크롤 동작 부드럽게 가능
+            if(window.scrollY >= 100) {
+                $('.navbar-brand').css('font-size', '20px');
+            } else {
+                $('.navbar-brand').css('font-size', '25px');
+            }
+
+            // 라인 진행도 추가
+            $('.line').css('width', (window.scrollY / (document.querySelector('html').scrollHeight - document.querySelector('html').clientHeight) * 100) + '%');
+        });
+
+        $(window).on('scroll', function() {
+            $(window).scrollTop();
+            // window.scrollY와 같다
+        });
+    </script>
 
     <ul class="list-group">
         <li class="list-group-item">An item</li>
@@ -56,6 +83,37 @@
         <h4>Shirts on Sale</h4>
         <button id="login" class="btn btn-danger">로그인</button>    
     </div>
+
+    <div class="lorem" style="width: 200px; height: 100px; overflow-y: scroll;">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla autem vel laudantium libero, maxime earum vero officiis pariatur maiores, eveniet voluptate est labore inventore officia obcaecati debitis ad quis architecto?</div>
+
+    <script>
+
+        $('.lorem').on('scroll', function() {
+            // div의 스크롤바 내린 양 + 눈에 보이는 div 높이 == div의 실제 높이
+            divScroll = document.querySelector('.lorem').scrollTop;
+            divHeight = document.querySelector('.lorem').scrollHeight;
+            divClient = document.querySelector('.lorem').clientHeight;
+            if(divScroll+divClient >= divHeight- 0.5) {
+                alert('다 읽었음');
+            }
+        });
+
+        // scroll 다룰 때 주의점
+        // 1. scroll 이벤트리스너 안의 코드는 1초에 60번 이상 실행 -> 컴퓨터 부담
+        // 2. 바닥 체크도 여러번 중복으로 해줌
+        
+        // 이해만 잘 하고 지나가기
+        // 1. 스크롤바 조작할 때마다 코드실행 가능
+        // 2. 박스의 실제 높이 / 보이는 높이 구할 수 있구나
+        // 3. 스크롤양도 구할 수 있구나
+
+        // 현재페이지 끝까지 스크롤 체크는? -> html 태그의 높이 찾기
+        document.querySelector('html').scrollHeight; // 전체 길이
+        document.querySelector('html').clientHeight; // 보는 화면의 길이
+        window.scrollY; // 현재 페이지 스크롤 양
+    </script>
+
+    <div style="height: 1000px;"></div>
 
     <div class="alert alert-danger">
         <span id="num">5</span>초 이내 구매시 사은품 증정!
@@ -80,6 +138,8 @@
     <button class="slide-3">3</button>
     <button class="next">다음</button>
     <button class="before">이전</button>
+
+    
 
     <script>
         let currentPhoto = 1;
