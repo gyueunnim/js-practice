@@ -14,6 +14,7 @@
     <title>Hello, world!</title>
   </head>
   <body>
+    <!-- 이벤트 버블링 : 이벤트가 상위 html로 퍼진다 -->
     <div class="black-bg">
         <div class="white-bg">
             <h4>로그인하세요</h4>
@@ -30,6 +31,24 @@
             </form> 
         </div>
     </div> 
+
+    <script>
+        
+        // 유용한 이벤트 관련 함수들 (이벤트 버블링 항상 일어남, 이벤트 관련 기능들 사용 가능)
+        document.querySelector('.black-bg').addEventListener('click', (e) => {
+            // e.target; // 유저가 실제로 누른 것
+            // e.currentTarget; // 유저가 실제로 누른 것
+            // this;
+            // e.preventDefault(); // 기본 동작 막는다
+            // e.stopPropagation(); // 내 상위 요소 이벤트 버블링 막는다
+            if(e.target == document.querySelector('.black-bg')) {
+                $('.black-bg').removeClass('show-modal');
+            }
+            
+        });
+
+        
+    </script>
     <!-- one-way UI 애니메이션 만드는 법 -->
     <!-- A상태 -> B상태 -->
     <!-- 1.시작스타일 2. 최종스타일 3.최종스타일로 변하라고 코드 짬 4.transition 추가 -->
