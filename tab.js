@@ -6,15 +6,29 @@
 let len = document.getElementsByClassName('tab-button').length;
 // 또는
 let len2 = $('.tab-button').length;
-for (let i = 0; i < len;  i++) {
-    $('.tab-button').eq(i).on('click', () => {
+// for (let i = 0; i < len;  i++) {
+//     openTab(i);
+// }
+
+function openTab(n) {
+    $('.tab-button').eq(n).on('click', () => { 
         $('.tab-button').removeClass('orange');
-        $('.tab-button').eq(i).addClass('orange');
+        $('.tab-button').eq(n).addClass('orange');
         $('.tab-content').removeClass('show');
-        $('.tab-content').eq(i).addClass('show');
+        $('.tab-content').eq(n).addClass('show');
     })
 }
+// 성능 개선 -> 이벤트리스너 줄이기 (이벤트 버블링 활용)
+// 상위 태그에 이벤트 리스너 붙임
 
+$('.list').click(function(e) {
+    // if(e.target == document.querySelectorAll('.tab-button')[0]) {
+    //     openTab(0)
+    // }
+
+    // dataset 문법 활용
+    openTab(parseInt(e.target.dataset.id));
+})
 
 // $('.tab-button').eq(1).on('click', () => {
 //     $('.tab-button').removeClass('orange');
@@ -24,7 +38,7 @@ for (let i = 0; i < len;  i++) {
 // })
 
 // $('.tab-button').eq(2).on('click', () => {
-//     $('.tab-button').removeClass('orange');
+//      $('.tab-button').removeClass('orange');
 //     $('.tab-button').eq(2).addClass('orange');
 //     $('.tab-content').removeClass('show');
 //     $('.tab-content').eq(2).addClass('show');
