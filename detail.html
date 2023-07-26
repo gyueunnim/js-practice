@@ -54,6 +54,30 @@
         }
     </style>
 
+    <div class="container mt-3">
+      <div class="card p-3">
+          <span class="car-title">상품명</span>
+          <span>가격</span>
+      </div>
+    </div>
+
+    <script>
+      // array 자료형
+      var car1 = ['소나타', 50000, 'white'];
+      
+      // 0bject 자료형 (key, value)
+      var car2 = {
+        name: '소나타',
+        price: 50000
+      };
+
+      document.querySelector('.car-title').innerHTML = car2.name;
+      // array vs object
+      // 데이터가 많을 경우 object 쓰는게 편하다 (key)
+      // object는 순서 개념이 없다
+      // array는 자료간 정렬, 자르기(slice) 등 가능하다
+
+    </script>
 
     <!-- html 태그에 몰래 정보 숨기기 가능 dataset-->
     <!-- data-자료이름="값"  -->
