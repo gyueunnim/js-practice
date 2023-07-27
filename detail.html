@@ -115,25 +115,42 @@
 
 
     <script>
+      var pants = [28, 30, 32, 34];
+      var shirts = [95, 100, 105];
       $('.form-select').eq(0).on('input', (e) => {
-        // let val = this.value;
+        // let val = this.value; -> function 사용
         let val = e.currentTarget.value;
         if(val == '셔츠') {
           $('.form-select').eq(1).html('');
-          var a = `<option>95</option>
-          <option>100</option>`;
-          $('.form-select').eq(1).append(a);
           $('.form-select').eq(1).removeClass('form-hide');
+          // array 자료형 반복문은 (array.forEach)
+          shirts.forEach((a, i) => {
+            $('.form-select').eq(1).append(`<option>${a}</option>`)
+          })
         } else if(val == '바지') {
           $('.form-select').eq(1).html('');
-          var a = `<option>28</option>
-          <option>30</option>`;
-          $('.form-select').eq(1).append(a);
           $('.form-select').eq(1).removeClass('form-hide');
+          pants.forEach((a, i) => {
+            $('.form-select').eq(1).append(`<option>${a}</option>`)
+          }) 
         } else {
           $('.form-select').eq(1).addClass('form-hide');
         }
       });
+
+      var obj = {
+        name: 'kim',
+        age: 20,
+      }
+
+      // object 자료형 반복문은 for (var key in obj)
+      for (var key in obj) {
+        console.log(key + ':', obj[key]);
+      }
+
+      // 참고
+      // arrow function 쓰면 함수 안의 this 뜻이 달라질 수 있다
+      // function은 this 알맞게 재설정 해준다
     </script>
 
     <!-- html 태그에 몰래 정보 숨기기 가능 dataset-->
