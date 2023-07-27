@@ -77,3 +77,7 @@
     width: 1%;
     border: 1px solid black;
 }
+
+.form-hide {
+    display: none;
+}
