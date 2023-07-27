@@ -85,6 +85,7 @@
       <select class="form-select mt-2">
         <option>모자</option>
         <option>셔츠</option>
+        <option>바지</option>
       </select>
       <select class="form-select mt-2 form-hide">
         <option>95</option>
@@ -93,10 +94,41 @@
     </form>
 
     <script>
+
+    </script>
+    
+    <!-- 자바스크립트로 html 생성법 1 (더 빠름)-->
+    <div class="" id="test"></div>
+    <script>
+      var a = document.createElement('p');
+      a.innerHTML = '안녕';
+      document.querySelector('#test').appendChild(a);
+    </script>
+    
+    <!-- 자바스크립트로 html 생성법 2-->
+    <script>
+      var temp = '<p>안녕</p>';
+      document.querySelector('#test').insertAdjacentHTML('beforeend', temp);
+      $('#test').append(temp);
+      // 추가말고 갈아치우고 싶으면 innerHTML / html() 사용하기
+    </script>
+
+
+    <script>
       $('.form-select').eq(0).on('input', (e) => {
         // let val = this.value;
         let val = e.currentTarget.value;
         if(val == '셔츠') {
+          $('.form-select').eq(1).html('');
+          var a = `<option>95</option>
+          <option>100</option>`;
+          $('.form-select').eq(1).append(a);
+          $('.form-select').eq(1).removeClass('form-hide');
+        } else if(val == '바지') {
+          $('.form-select').eq(1).html('');
+          var a = `<option>28</option>
+          <option>30</option>`;
+          $('.form-select').eq(1).append(a);
           $('.form-select').eq(1).removeClass('form-hide');
         } else {
           $('.form-select').eq(1).addClass('form-hide');
