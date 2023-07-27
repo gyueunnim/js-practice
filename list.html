@@ -14,7 +14,8 @@
     <title>Hello, world!</title>
   </head>
   <body>
-    
+    <!-- form 태그로 서버 요청 시 새로고침 된다 -->
+    <!-- ajax를 통해 새로고침 없이 GET, POST 요청 기능 -->
     <div class="card-group container">
         <div class="card">
           <img src="https://via.placeholder.com/600">
@@ -56,7 +57,40 @@
 
       </script> 
 
+      <script>
+        // ajax로 GET 요청하는 법
+        // $.get('https://codingapple1.github.io/hello.txt')
+        //   .done(function(data) {
+        //   console.log(data);
+        // }).fail(function() {
+        //   console.log('실패함');
+        // })
 
+        // ajax로 POST 요청하는 법
+        // $.post('https://codingapple1.github.io/hello.txt', {name: 'kim'})
+        // .done(function(data) {
+        //   console.log(data);
+        // })
+
+        $.get('https://codingapple1.github.io/price.json')
+          .done(function(data) { // 자동으로 변환해줌
+          console.log(data.price);
+        }).fail(function() {
+          console.log('실패함');
+        })
+
+        // fetch 써도 ajax 가능
+        fetch('https://codingapple1.github.io/price.json')
+          .then(res => res.json()) // json 자료를 object로 변환
+          .then(data => {
+            console.log(data);
+          })
+          .catch(error => {
+            console.log(error);
+          })
+
+          // 이외에 axios 등 활용
+      </script>
 
 
 
