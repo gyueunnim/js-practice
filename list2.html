@@ -25,33 +25,93 @@
       
         </div>
     </div> 
-      
-    <script>
-
-    function makeTemplate(data) {
-        data.forEach((a, i) => {
-            var temp = `<div class="col-sm-4">
-            <img src="https://via.placeholder.com/600" class="w-100">
-            <h5>${a.title}</h5>
-            <p>가격 : ${a.price}</p>
-        </div>
-        `
-        $('.row').eq(0).append(temp)
-        })
-    }
-    
-    var products = [
-        { id : 0, price : 70000, title : 'Blossom Dress' },
-        { id : 1, price : 50000, title : 'Springfield Shirt' },
-        { id : 2, price : 60000, title : 'Black Monastery' }
-    ];
-
-    makeTemplate(products);
-    </script>
 
     <div class="container">
         <button class="btn btn-danger">더보기</button>
     </div>
+
+
+    <div class="container mt-3">
+        <button class="btn btn-danger" id="price">가격순 정렬</button>
+    </div>
+
+    <div class="container mt-3">
+        <button class="btn btn-danger" id="reverse-str">다나가순 정렬</button>
+    </div>
+
+    <div class="container mt-3">
+        <button class="btn btn-danger" id="under-price">6만원 이하 상품만 보기</button>
+    </div>
+      
+    <script>
+        function makeTemplate(data) {
+            data.forEach((a, i) => {
+                var temp = `<div class="col-sm-4">
+                <img src="https://via.placeholder.com/600" class="w-100">
+                <h5>${a.title}</h5>
+                <p>가격 : ${a.price}</p>
+            </div>
+            `
+            $('.row').eq(0).append(temp)
+            })
+        }
+        
+        var products = [
+            { id : 0, price : 70000, title : 'Blossom Dress' },
+            { id : 1, price : 50000, title : 'Springfield Shirt' },
+            { id : 2, price : 60000, title : 'Black Monastery' }
+        ];
+
+        makeTemplate(products);
+
+        $('#price').click(() => {
+            products.sort((a, b) => {
+                return a.price - b.price;
+            })
+            $('.row').html('');
+            makeTemplate(products);
+        })
+
+        $('#reverse-str').click(() => {
+            products.sort((a, b) => {
+                return a.title > b.title ? -1 : a.title > b.title ? 1 : 0;
+            })
+            console.log(products);
+            $('.row').html('');
+            makeTemplate(products);
+        })
+
+        $('#under-price').click(() => {
+            var resultProducts = products.filter((a) => {
+                return a.price <= 60000;
+            })
+            $('.row').html('');
+            makeTemplate(resultProducts);
+        })
+     
+        // 문자 정렬
+        var tempArr = [7, 3, 5, 2, 40];
+        var tempArr2 = ['a', 'b', 'c']; // 문자 역순?
+        tempArr.sort();
+        // 숫자 정렬
+        tempArr.sort(function(a, b) {
+            return a - b;
+            // return b - a; 역순 정렬
+        });
+
+        // array 자료 원하는 것만 필터
+        var resultArr = tempArr.filter((a) => { // 새 변수에 저장해야 한다 (원본 변형 X)
+            return a < 4; // 4 미만 자료 필터 (가격 검색 등)
+        });
+
+        // array 자료 전부 변형
+        var resultArr2 = tempArr2.map(function(a){
+            return a * 4; // 자료 전부 4 곱 (달러 => 원 표기 등)
+        });
+
+    </script>
+
+
 
     <script>
         let click = 0;
@@ -66,7 +126,6 @@
             })
             .fail(error => console.log(error));
         })
-
     </script>
 
 
