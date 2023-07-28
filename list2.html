@@ -50,6 +50,7 @@
                 <img src="https://via.placeholder.com/600" class="w-100">
                 <h5>${a.title}</h5>
                 <p>가격 : ${a.price}</p>
+                <button class="buy mb-3">구매</button>
             </div>
             `
             $('.row').eq(0).append(temp)
@@ -91,8 +92,13 @@
      
         // 문자 정렬
         var tempArr = [7, 3, 5, 2, 40];
-        var tempArr2 = ['a', 'b', 'c']; // 문자 역순?
+        var tempArr2 = ['a', 'b', 'c'];
         tempArr.sort();
+        tempArr.sort((a, b) => { // 문자 역순 정렬
+            if(a < b) return 1;
+            if(a > b) return -1;
+            if(a === b) return 0;
+        })
         // 숫자 정렬
         tempArr.sort(function(a, b) {
             return a - b;
@@ -109,6 +115,89 @@
             return a * 4; // 자료 전부 4 곱 (달러 => 원 표기 등)
         });
 
+    </script>
+
+    <script>
+        // 개발자 도구 application
+        // localStorage, sessionStorage: 이름 : 값 형태로 저장 가능
+        // IndexedDB: 구조화된 대용량 데이터 저장 시
+        // Cookies: 보통 로그인 인증 정보 저장 (서버)
+        // Cache Storage: html css js 파일 저장하는 곳
+
+
+        // localStorage를 통해 장바구니 구현
+        
+        
+        // localStorage.setItem('num', [1, 2, 3]);
+        // array => string으로 저장된다.
+        // 따라서 json으로 바꿔서 저장해야한다.
+        var arr = [1, 2, 3];
+        var newArr = JSON.stringify(arr);
+        // localStorage.setItem('num', newArr);
+
+        // var getArr = localStorage.getItem('num');
+        // JSON.parse
+
+        // sessionStorage는 localStorage만 바꾸면 됨
+
+        // 수정하려면 자료 꺼냄 -> 수정 -> 자료 넣기
+
+
+        // localStorage.setItem('이름', 20);
+        // localStorage.getItem('이름');
+    </script>
+
+    <script>
+        // 이렇게 하기 싫으면 $('buy').click: 제이쿼리는 모두 다 잡아줌
+        // 혹은 event bubbling 활용해서 상위 하나만 하기
+        // 밑은 products에 의존하는 코드임...
+
+        // 중복 방지 - Set 활용
+        /*
+        $('.buy').click((e) => {
+            var cartTitle = $(e.target).siblings('h5').text();
+            if(localStorage.getItem('cart') != null) {
+                var tempCart = JSON.parse(localStorage.cart);
+                tempCart.push(cartTitle);
+                tempCart = new Set(tempCart);
+                tempCart = Array.from(tempCart);
+                localStorage.setItem('cart', JSON.stringify(tempCart));
+            } else {
+                localStorage.setItem('cart', JSON.stringify([cartTitle]));
+            }            
+        })
+        */
+        // 중복 방지 - 개수 증가
+        $('.buy').click((e) => {
+            var cartTitle = $(e.target).siblings('h5').text();
+            var cart = {
+                title: cartTitle,
+                num: 1,
+            }
+            var r = false;
+
+            if(localStorage.getItem('cart') != null) { // 장바구니가 비어있지 않을 때
+                var cartList = JSON.parse(localStorage.cart);
+                cartList.forEach((a, i) => {
+                    if(cartTitle === a.title) {
+                        a.num += 1;
+                        r = true;
+                        return;
+                    }
+                });
+                if(!r) {
+                    cartList.push(cart);
+                }
+                localStorage.setItem('cart', JSON.stringify(cartList));
+                console.log(cartList);
+                // tempCart.push(cartTitle);
+                // tempCart = new Set(tempCart);
+                // tempCart = Array.from(tempCart);
+                // localStorage.setItem('cart', JSON.stringify(tempCart));
+            } else {    // 장바구니가 비어있을 때
+                localStorage.setItem('cart', JSON.stringify([cart]));
+            }            
+        })
     </script>
 
 
