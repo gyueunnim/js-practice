@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./card.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="card-background">
+        <div class="card-box">
+            <img src="./card1.png" alt="">
+        </div>
+        <div class="card-box">
+            <img src="./card2.png" alt="">
+        </div>
+        <div class="card-box">
+            <img src="./card3.png" alt="">
+        </div>
+
+    </div>
+
+    <script>
+        // 거의 모든 스크롤 리스너는 이렇게 시작한다 (window -> viewport)
+        $(window).scroll(function() {
+            var height = $(window).scrollTop();
+            // y = a * 높이 + b;에서 a와 b를 구하기 (opacity 1, 0일 때 height 대입)
+            var y = (-1 / 500) * height + (115 / 50);
+            var z = (-1 / 5000) * height + 565/500;
+            $('.card-box').eq(0).css('opacity', y);
+            $('.card-box').eq(0).css('transform', `scale( ${z} )`);
+        });
+    </script>
+</body>
+</html>
